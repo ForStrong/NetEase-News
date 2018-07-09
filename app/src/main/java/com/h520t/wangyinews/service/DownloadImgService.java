@@ -17,6 +17,7 @@ import com.h520t.wangyinews.splashScreen.SplashActivity;
 import com.h520t.wangyinews.splashScreen.javaBean.Ads;
 import com.h520t.wangyinews.splashScreen.javaBean.AdsBean;
 import com.h520t.wangyinews.util.Contants;
+import com.h520t.wangyinews.util.FileUtil;
 import com.h520t.wangyinews.util.Md5Helper;
 
 import java.io.File;
@@ -77,13 +78,7 @@ public class DownloadImgService extends IntentService {
         if (bitmap == null) {
             return;
         }
-        File directory = getCacheDir();
-        File cacheFile = new File(directory, Contants.IMG_CACHE);
-        if (!cacheFile.exists()) {
-            cacheFile.mkdirs();
-        }
-
-        File imgFile = new File(cacheFile, md5_name + ".jpg");
+        File imgFile = FileUtil.getImgFile(DownloadImgService.this, md5_name);
         if (imgFile.exists()) {
             return;
         }
