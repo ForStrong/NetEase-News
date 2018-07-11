@@ -7,6 +7,6 @@
     android:gravity="center"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:textColor="@drawable/tab_selector"
+    android:textColor="@color/tab_text_selector"
     android:textSize="16sp"
     />

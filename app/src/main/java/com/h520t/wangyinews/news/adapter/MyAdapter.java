@@ -1,8 +1,10 @@
-package com.h520t.smarttablayouttest;
+package com.h520t.wangyinews.news.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.h520t.wangyinews.news.bean.FragmentInfo;
 
 import java.util.List;
 

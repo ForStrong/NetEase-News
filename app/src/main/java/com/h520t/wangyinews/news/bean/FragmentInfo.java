@@ -1,4 +1,4 @@
-package com.h520t.smarttablayouttest;
+package com.h520t.wangyinews.news.bean;
 
 import android.support.v4.app.Fragment;
 
@@ -31,7 +31,7 @@ public class FragmentInfo {
         return title;
     }
 
-    public void settitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

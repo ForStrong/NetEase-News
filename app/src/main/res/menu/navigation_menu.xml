@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/new_action"
+        android:title="新闻"
+        android:icon="@drawable/biz_navigation_tab_news_selected"
+        android:checked="true"
+        />
+
+    <item
+        android:id="@+id/read_action"
+        android:title="阅读"
+        android:icon="@drawable/biz_navigation_tab_read"
+        />
+    <item
+        android:id="@+id/video_action"
+        android:title="视频"
+        android:icon="@drawable/biz_navigation_tab_va"
+        />
+    <item
+        android:id="@+id/topic_action"
+        android:title="话题"
+        android:icon="@drawable/biz_navigation_tab_topic"
+        />
+
+    <item
+        android:id="@+id/my_action"
+        android:title="我"
+        android:icon="@drawable/biz_navigation_tab_pc"
+        />
 
 </menu>

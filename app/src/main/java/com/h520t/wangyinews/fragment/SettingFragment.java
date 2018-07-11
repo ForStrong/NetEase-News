@@ -1,9 +1,8 @@
 package com.h520t.wangyinews.fragment;
 
 
-
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import com.h520t.wangyinews.R;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class SettingFragment extends Fragment {
 
@@ -29,4 +27,10 @@ public class SettingFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
+    public static SettingFragment newsInstance(){
+        return SettingFragmentHolder.sSettingFragment;
+    }
+    private static class SettingFragmentHolder{
+        private static final SettingFragment sSettingFragment = new SettingFragment();
+    }
 }

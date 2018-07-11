@@ -1,22 +1,33 @@
 package com.h520t.wangyinews.fragment;
 
 
-
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.h520t.wangyinews.R;
+import com.h520t.wangyinews.news.adapter.MyAdapter;
+import com.h520t.wangyinews.news.bean.FragmentInfo;
+import com.h520t.wangyinews.news.news_inner_fragment.EmptyFragment;
+import com.h520t.wangyinews.news.news_inner_fragment.HostFragment;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class NewsFragment extends Fragment {
-
-
+    ArrayList<FragmentInfo> mFragmentInfos;
+    SmartTabLayout mSmartTabLayout;
+    ViewPager mViewPager;
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -26,7 +37,39 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        mSmartTabLayout = view.findViewById(R.id.view_pager_tab);
+        mViewPager = view.findViewById(R.id.viewpager);
+        mFragmentInfos = new ArrayList<>();
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        String[] stringArray = getResources().getStringArray(R.array.tab_titles);
+        for (int i = 0; i < stringArray.length; i++) {
+            Fragment fragment;
+            FragmentInfo fragmentInfo;
+            if (i==0){
+                fragment = new HostFragment();
+            }else {
+                fragment = new EmptyFragment();
+            }
+            fragmentInfo = new FragmentInfo(fragment,stringArray[i]);
+            mFragmentInfos.add(fragmentInfo);
+        }
+        MyAdapter adapter = new MyAdapter(getActivity().getSupportFragmentManager(),mFragmentInfos);
+        mViewPager.setAdapter(adapter);
+        mSmartTabLayout.setViewPager(mViewPager);
+    }
+
+    public static NewsFragment newsInstance(){
+        return NewsFragmentHolder.sNewsFragment;
+    }
+
+    private static class NewsFragmentHolder{
+        private static final NewsFragment sNewsFragment = new NewsFragment();
     }
 
 }

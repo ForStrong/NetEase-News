@@ -37,6 +37,9 @@ public class TimeView extends View {
 
     private RectF mRectF;
     private float sweepAngle = 0f;
+
+    private OnTimeClick mOnTimeClick;
+
     public TimeView(Context context) {
         super(context);
     }
@@ -114,8 +117,15 @@ public class TimeView extends View {
 
             case MotionEvent.ACTION_UP:
                 setAlpha(1.0f);
+                if (mOnTimeClick!=null){
+                    mOnTimeClick.OnClickTime(this);
+                }
                 break;
         }
         return true;
+    }
+
+    public void setListener(OnTimeClick onTimeClick){
+        this.mOnTimeClick = onTimeClick;
     }
 }

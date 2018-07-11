@@ -1,6 +1,7 @@
 package com.h520t.wangyinews.splashScreen;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.h520t.wangyinews.MainActivity;
 import com.h520t.wangyinews.R;
 @SuppressLint("SetJavaScriptEnabled")
 public class WebViewActivity extends AppCompatActivity {
@@ -59,7 +61,11 @@ public class WebViewActivity extends AppCompatActivity {
         if (webView.canGoBack()){
             webView.goBack();
             return;
+        }else {
+            Intent intent = new Intent();
+            intent.setClass(WebViewActivity.this, MainActivity.class);
+            startActivity(intent);
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 }

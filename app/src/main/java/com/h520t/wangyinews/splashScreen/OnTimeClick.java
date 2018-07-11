@@ -1,5 +1,7 @@
 package com.h520t.wangyinews.splashScreen;
 
+import android.view.View;
+
 /**
  * @author Administrator
  * @des ${TODO}
@@ -9,4 +11,5 @@ package com.h520t.wangyinews.splashScreen;
  */
 
 public interface OnTimeClick {
+    public void OnClickTime(View view);
 }
