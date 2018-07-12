@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             , R.drawable.biz_navigation_tab_va_selected
             , R.drawable.biz_navigation_tab_topic_selected
             , R.drawable.biz_navigation_tab_pc_selected};
-    List<Fragment> mFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         mNavigationView = findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(mNavigationView);
 
-        mFragments = new ArrayList<>();
-        mFragments.add(NewsFragment.newsInstance());
-        mFragments.add(new ReadFragment());
-        mFragments.add(new VideoFragment());
-        mFragments.add(new TopicFragment());
-        mFragments.add(new SettingFragment());
 
         mNavigationView.setItemIconTintList(null);
 

@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.google.gson.reflect.TypeToken;
 import com.h520t.wangyinews.MainActivity;
 import com.h520t.wangyinews.R;
 import com.h520t.wangyinews.service.DownloadImgService;
@@ -24,6 +25,8 @@ import com.h520t.wangyinews.splashScreen.javaBean.Ads;
 import com.h520t.wangyinews.splashScreen.javaBean.AdsBean;
 import com.h520t.wangyinews.util.Contants;
 import com.h520t.wangyinews.util.FileUtil;
+import com.h520t.wangyinews.util.HttpResponse;
+import com.h520t.wangyinews.util.HttpUtil;
 import com.h520t.wangyinews.util.JsonUtil;
 import com.h520t.wangyinews.util.Md5Helper;
 import com.h520t.wangyinews.util.SharedPreferenceUtil;
@@ -41,8 +44,9 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class SplashActivity extends AppCompatActivity {
+
     private ImageView ads_img;
-    private final OkHttpClient mClient = new OkHttpClient();
+
     private static final String ADS_CONTENT = "ads_content";
     private static final String NEXT_REQ = "next_req";
     private static final String NOW_TIME = "now_time";
@@ -181,10 +185,34 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getHttp(){
+/*        HttpUtil httpUtil = HttpUtil.getInstance();
+        httpUtil.getData(Contants.SPLASH_URL, new HttpResponse<String>(String.class) {
+            @Override
+            public void onError(String msg) {
+                Log.i("h520it", "getHttp onError: ");
+            }
+
+            @Override
+            public void onSuccess(String data) {
+
+                Ads ads = JsonUtil.parseJson(data, new TypeToken<List<Ads>>(){}.getType());
+                if (ads!=null) {
+                    SharedPreferenceUtil.setString(SplashActivity.this,ADS_CONTENT,data);
+                    SharedPreferenceUtil.setInt(SplashActivity.this,NEXT_REQ,ads.getNext_req());
+                    SharedPreferenceUtil.setLong(SplashActivity.this,NOW_TIME, System.currentTimeMillis());
+                    //通过IntentService下载图片
+                    Intent intent = new Intent();
+                    intent.setClass(SplashActivity.this, DownloadImgService.class);
+                    intent.putExtra(DownloadImgService.ADS_DATA, ads);
+                    startService(intent);
+                }
+            }
+
+        });*/
         Log.i("h520it", "getHttp: 11111");
         //请求
         Request request = new Request.Builder().url(Contants.SPLASH_URL).build();
-
+        OkHttpClient mClient = new OkHttpClient();
         //异步回调
         mClient.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {

@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+
 /**
  * @author Administrator
  * @des ${TODO}
@@ -13,16 +15,16 @@ import com.google.gson.Gson;
  */
 
 public class JsonUtil {
-    static Gson mgson;
+    static Gson mGson;
 
-    public static <T> T parseJson(String json,Class<T> tclass){
-        if (mgson == null){
-            mgson = new Gson();
+    public static <T> T parseJson(String json, Class<T> t){
+        if (mGson == null){
+            mGson = new Gson();
         }
         if(TextUtils.isEmpty(json)){
             return null;
         }
-        return mgson.fromJson(json, tclass);
+        return  mGson.fromJson(json, t);
 
     }
 }

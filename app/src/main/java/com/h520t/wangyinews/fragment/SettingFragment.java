@@ -1,6 +1,7 @@
 package com.h520t.wangyinews.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,8 +15,8 @@ import com.h520t.wangyinews.R;
  */
 public class SettingFragment extends Fragment {
 
-
-    public SettingFragment() {
+    @SuppressLint("ValidFragment")
+    private SettingFragment() {
         // Required empty public constructor
     }
 

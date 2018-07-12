@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 
 public class Action implements Serializable{
+
     private String link_url;
 
     public String getLink_url() {

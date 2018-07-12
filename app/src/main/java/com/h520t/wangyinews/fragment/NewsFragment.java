@@ -1,6 +1,7 @@
 package com.h520t.wangyinews.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +29,8 @@ public class NewsFragment extends Fragment {
     ArrayList<FragmentInfo> mFragmentInfos;
     SmartTabLayout mSmartTabLayout;
     ViewPager mViewPager;
-    public NewsFragment() {
+    @SuppressLint("ValidFragment")
+    private NewsFragment() {
         // Required empty public constructor
     }
 
@@ -69,7 +71,7 @@ public class NewsFragment extends Fragment {
     }
 
     private static class NewsFragmentHolder{
-        private static final NewsFragment sNewsFragment = new NewsFragment();
+        private static  NewsFragment sNewsFragment = new NewsFragment();
     }
 
 }
