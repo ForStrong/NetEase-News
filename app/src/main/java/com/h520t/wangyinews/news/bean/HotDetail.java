@@ -12,36 +12,28 @@ public class HotDetail {
 
 
 
-    private String recSource;
+    private String source;
     private String title;
-    private String replyCount;
-    private String imgsrc;
+    private int replyCount;
+    private String img;
     public HotDetail() {
     }
 
-    public HotDetail(String recSource, String title, String replyCount, String imgsrc) {
-        this.recSource = recSource;
+    public HotDetail(String source, String title, int replyCount, String img) {
+        this.source = source;
         this.title = title;
         this.replyCount = replyCount;
-        this.imgsrc = imgsrc;
+        this.img = img;
     }
 
     @Override
     public String toString() {
         return "HotDetail{" +
-                "recSource='" + recSource + '\'' +
+                "source='" + source + '\'' +
                 ", title='" + title + '\'' +
-                ", replyCount='" + replyCount + '\'' +
-                ", imgsrc='" + imgsrc + '\'' +
+                ", replyCount=" + replyCount +
+                ", img='" + img + '\'' +
                 '}';
-    }
-
-    public String getRecSource() {
-        return recSource;
-    }
-
-    public void setRecSource(String recSource) {
-        this.recSource = recSource;
     }
 
     public String getTitle() {
@@ -52,19 +44,28 @@ public class HotDetail {
         this.title = title;
     }
 
-    public String getReplyCount() {
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public int getReplyCount() {
         return replyCount;
     }
 
-    public void setReplyCount(String replyCount) {
+    public void setReplyCount(int replyCount) {
         this.replyCount = replyCount;
     }
 
-    public String getImgsrc() {
-        return imgsrc;
+    public String getImg() {
+        return img;
     }
 
-    public void setImgsrc(String imgsrc) {
-        this.imgsrc = imgsrc;
+    public void setImg(String img) {
+        this.img = img;
     }
 }

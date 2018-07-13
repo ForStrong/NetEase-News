@@ -54,14 +54,14 @@ public class NewsFragment extends Fragment {
             Fragment fragment;
             FragmentInfo fragmentInfo;
             if (i==0){
-                fragment = new HostFragment();
+                fragment = HostFragment.newsInstance();
             }else {
                 fragment = new EmptyFragment();
             }
             fragmentInfo = new FragmentInfo(fragment,stringArray[i]);
             mFragmentInfos.add(fragmentInfo);
         }
-        MyAdapter adapter = new MyAdapter(getActivity().getSupportFragmentManager(),mFragmentInfos);
+        MyAdapter adapter = new MyAdapter(getChildFragmentManager(),mFragmentInfos);
         mViewPager.setAdapter(adapter);
         mSmartTabLayout.setViewPager(mViewPager);
     }
@@ -71,6 +71,7 @@ public class NewsFragment extends Fragment {
     }
 
     private static class NewsFragmentHolder{
+
         private static  NewsFragment sNewsFragment = new NewsFragment();
     }
 

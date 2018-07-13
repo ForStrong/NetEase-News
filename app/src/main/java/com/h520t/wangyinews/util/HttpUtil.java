@@ -21,22 +21,29 @@ import okhttp3.ResponseBody;
  */
 
 public class HttpUtil {
-    OkHttpClient mClient;
+    static HttpUtil util;
+    static OkHttpClient client;
+
+
     private HttpUtil(){
-        mClient = new OkHttpClient();
+        client = new OkHttpClient();
     }
 
+    //单例的方法
     public static HttpUtil getInstance(){
-        return HttpUtilHolder.sHttpUtil;
-    }
-
-    private static class HttpUtilHolder{
-        private static HttpUtil sHttpUtil = new HttpUtil();
+        if(util==null){
+            synchronized (HttpUtil.class){
+                if(util==null){
+                    util = new HttpUtil();
+                }
+            }
+        }
+        return  util;
     }
 
     public void getData(String aimUrl, final HttpResponse httpResponse){
         Request request = new Request.Builder().url(aimUrl).build();
-        mClient.newCall(request).enqueue(new Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

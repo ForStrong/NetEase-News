@@ -1,5 +1,6 @@
 package com.h520t.wangyinews.news.adapter;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -38,4 +39,10 @@ public class MyAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mFragmentInfos.get(position).getTitle();
     }
+
+    @Override
+    public void restoreState(Parcelable state, ClassLoader loader) {
+
+    }
+
 }

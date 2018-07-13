@@ -185,7 +185,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getHttp(){
-/*        HttpUtil httpUtil = HttpUtil.getInstance();
+
+        HttpUtil httpUtil = HttpUtil.getInstance();
         httpUtil.getData(Contants.SPLASH_URL, new HttpResponse<String>(String.class) {
             @Override
             public void onError(String msg) {
@@ -195,7 +196,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String data) {
 
-                Ads ads = JsonUtil.parseJson(data, new TypeToken<List<Ads>>(){}.getType());
+                Ads ads = JsonUtil.parseJson(data, Ads.class);
                 if (ads!=null) {
                     SharedPreferenceUtil.setString(SplashActivity.this,ADS_CONTENT,data);
                     SharedPreferenceUtil.setInt(SplashActivity.this,NEXT_REQ,ads.getNext_req());
@@ -208,10 +209,8 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
 
-        });*/
-        Log.i("h520it", "getHttp: 11111");
-        //请求
-        Request request = new Request.Builder().url(Contants.SPLASH_URL).build();
+        });
+       /* Request request = new Request.Builder().url(Contants.SPLASH_URL).build();
         OkHttpClient mClient = new OkHttpClient();
         //异步回调
         mClient.newCall(request).enqueue(new Callback() {
@@ -244,7 +243,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
 
     }
