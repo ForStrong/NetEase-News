@@ -54,7 +54,7 @@ public class HotAdapter extends Adapter<HotAdapter.ViewHolder>{
         String img_url = detail.getImg();
         Glide.with(mContext)
                 .load(img_url)
-                .placeholder(R.drawable.xidada)
+                .placeholder(R.drawable.xidada )
                 .error(R.drawable.xidada)
                 .into(holder.img);
         holder.title.setText(detail.getTitle());

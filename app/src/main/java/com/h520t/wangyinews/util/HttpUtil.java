@@ -24,7 +24,6 @@ public class HttpUtil {
     static HttpUtil util;
     static OkHttpClient client;
 
-
     private HttpUtil(){
         client = new OkHttpClient();
     }

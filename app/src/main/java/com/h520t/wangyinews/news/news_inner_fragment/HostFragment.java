@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.h520t.wangyinews.R;
 import com.h520t.wangyinews.news.adapter.HotAdapter;
 import com.h520t.wangyinews.news.bean.Hot;
@@ -35,6 +38,11 @@ public class HostFragment extends Fragment {
     MyHandler mMyHandler;
     final int INIT_SUCCESS = 0;
     Context mContext;
+    SwipeToLoadLayout mSwipeToLoadLayout;
+    int start = 0;
+    int end = 20;
+    HotAdapter hotAdapter;
+
     @SuppressLint("ValidFragment")
     private HostFragment() {
         // Required empty public constructor
@@ -46,12 +54,26 @@ public class HostFragment extends Fragment {
         View view;
         if(container.getTag()==null){
             view = inflater.inflate(R.layout.fragment_host, container, false);
-            mRecyclerView = view.findViewById(R.id.recycler_view);
+            mSwipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
+            mRecyclerView = view.findViewById(R.id.swipe_target);
             container.setTag(view);
         }else{
             view = (View) container.getTag();
         }
         return view;
+    }
+
+    private void refreshRVBottomData() {
+            start = end;
+            end = start + 20;
+    }
+
+
+    private void refreshRVTopData() {
+        if(start>=20){
+            start -= 20;
+            end -= 20;
+        }
     }
 
     @Override
@@ -60,11 +82,31 @@ public class HostFragment extends Fragment {
         mMyHandler = new MyHandler(this);
         mContext = getActivity();
         getData();
+        mSwipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshRVTopData();
+                getData();
+
+            }
+        });
+
+        mSwipeToLoadLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                refreshRVBottomData();
+                getData();
+                hotAdapter.notifyDataSetChanged();
+                mSwipeToLoadLayout.setLoadingMore(false);
+            }
+        });
+
     }
 
     private void getData() {
-            HttpUtil httpUtil = HttpUtil.getInstance();
-            httpUtil.getData(Contants.HOT_URL, new HttpResponse<Hot>(Hot.class) {
+        HttpUtil httpUtil = HttpUtil.getInstance();
+        String hotUrl = Contants.getHotUrl(start, end);
+        httpUtil.getData(hotUrl, new HttpResponse<Hot>(Hot.class) {
 
             @Override
             public void onError(String msg) {
@@ -73,11 +115,14 @@ public class HostFragment extends Fragment {
 
             @Override
             public void onSuccess(Hot hot) {
-                String s = hot.toString();
-                mHotDetails = hot.getT1348647909107();
+                if (mHotDetails==null){
+                    mHotDetails = hot.getT1348647909107();
+                }else {
+                    mHotDetails.addAll(hot.getT1348647909107());
+                }
+
                 Log.i("h520it1", "onSuccess: "+mHotDetails.toString());
                 mMyHandler.sendEmptyMessage(INIT_SUCCESS);
-
             }
         });
     }
@@ -104,10 +149,15 @@ public class HostFragment extends Fragment {
     }
 
     private void initData() {
-        LinearLayoutManager manager = new LinearLayoutManager(mContext);
-        mRecyclerView.setLayoutManager(manager);
-        HotAdapter hotAdapter = new HotAdapter(mHotDetails,getActivity());
-        mRecyclerView.setAdapter(hotAdapter);
+        if (hotAdapter==null) {
+            LinearLayoutManager manager = new LinearLayoutManager(mContext);
+            mRecyclerView.setLayoutManager(manager);
+            hotAdapter = new HotAdapter(mHotDetails, getActivity());
+            mRecyclerView.setAdapter(hotAdapter);
+        }else{
+            hotAdapter.notifyDataSetChanged();
+        }
+
     }
 
     public static HostFragment newsInstance(){
@@ -117,6 +167,8 @@ public class HostFragment extends Fragment {
     private static class HostFragmentHolder{
         private static  HostFragment sNewsFragment = new HostFragment();
     }
+
+
 
 
 }

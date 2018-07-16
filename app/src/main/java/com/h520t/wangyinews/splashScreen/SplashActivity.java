@@ -210,42 +210,6 @@ public class SplashActivity extends AppCompatActivity {
             }
 
         });
-       /* Request request = new Request.Builder().url(Contants.SPLASH_URL).build();
-        OkHttpClient mClient = new OkHttpClient();
-        //异步回调
-        mClient.newCall(request).enqueue(new Callback() {
-            @Override public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                try (ResponseBody responseBody = response.body()) {
-
-                    if (!response.isSuccessful()) {
-                        //请求失败
-                    }
-                    //拿到json解析的字符串
-                    String data = responseBody.string();
-                    //                    Log.i("520it", "onResponse: "+data);
-                    //把字符串用Gson解析成Ads对象
-                    Ads ads = JsonUtil.parseJson(data, Ads.class);
-                    if (ads!=null) {
-                        SharedPreferenceUtil.setString(SplashActivity.this,ADS_CONTENT,data);
-                        SharedPreferenceUtil.setInt(SplashActivity.this,NEXT_REQ,ads.getNext_req());
-                        SharedPreferenceUtil.setLong(SplashActivity.this,NOW_TIME, System.currentTimeMillis());
-                        //通过IntentService下载图片
-                        Intent intent = new Intent();
-                        intent.setClass(SplashActivity.this, DownloadImgService.class);
-                        intent.putExtra(DownloadImgService.ADS_DATA, ads);
-                        startService(intent);
-                    }
-                }
-            }
-        });*/
-
-
     }
 
     static class myHandler extends Handler{
