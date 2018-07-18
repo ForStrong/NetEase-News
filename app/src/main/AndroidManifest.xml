@@ -23,8 +23,9 @@
             android:name=".service.DownloadImgService"
             android:exported="false" />
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".splashScreen.WebViewActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".splashScreen.WebViewActivity" />
+        <activity android:name=".news.activity.DetailsActivity"></activity>
     </application>
 
 </manifest>

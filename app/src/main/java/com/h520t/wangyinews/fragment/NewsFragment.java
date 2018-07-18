@@ -18,6 +18,7 @@ import com.h520t.wangyinews.news.adapter.MyAdapter;
 import com.h520t.wangyinews.news.bean.FragmentInfo;
 import com.h520t.wangyinews.news.news_inner_fragment.EmptyFragment;
 import com.h520t.wangyinews.news.news_inner_fragment.HostFragment;
+import com.h520t.wangyinews.util.HttpUtil;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class NewsFragment extends Fragment {
     ArrayList<FragmentInfo> mFragmentInfos;
     SmartTabLayout mSmartTabLayout;
     ViewPager mViewPager;
+    static NewsFragment mNewsFragment;
     @SuppressLint("ValidFragment")
     private NewsFragment() {
         // Required empty public constructor
@@ -54,7 +56,7 @@ public class NewsFragment extends Fragment {
             Fragment fragment;
             FragmentInfo fragmentInfo;
             if (i==0){
-                fragment = HostFragment.newsInstance();
+                fragment = new HostFragment();
             }else {
                 fragment = new EmptyFragment();
             }
@@ -67,12 +69,21 @@ public class NewsFragment extends Fragment {
     }
 
     public static NewsFragment newsInstance(){
-        return NewsFragmentHolder.sNewsFragment;
+        if(mNewsFragment==null){
+            synchronized (NewsFragment.class){
+                if(mNewsFragment==null){
+                    mNewsFragment = new NewsFragment();
+                }
+            }
+        }
+        return  mNewsFragment;
     }
 
+/*
     private static class NewsFragmentHolder{
 
         private static  NewsFragment sNewsFragment = new NewsFragment();
     }
+*/
 
 }

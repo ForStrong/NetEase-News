@@ -3,6 +3,7 @@ package com.h520t.wangyinews.news.news_inner_fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,11 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.h520t.wangyinews.R;
+import com.h520t.wangyinews.RVlistener.RecyclerItemClickListener;
+import com.h520t.wangyinews.fragment.NewsFragment;
+import com.h520t.wangyinews.news.activity.DetailsActivity;
 import com.h520t.wangyinews.news.adapter.HotAdapter;
 import com.h520t.wangyinews.news.bean.Hot;
 import com.h520t.wangyinews.news.bean.HotDetail;
@@ -42,9 +47,10 @@ public class HostFragment extends Fragment {
     int start = 0;
     int end = 20;
     HotAdapter hotAdapter;
+    static HostFragment sHostFragment;
 
     @SuppressLint("ValidFragment")
-    private HostFragment() {
+    public HostFragment() {
         // Required empty public constructor
     }
 
@@ -87,7 +93,8 @@ public class HostFragment extends Fragment {
             public void onRefresh() {
                 refreshRVTopData();
                 getData();
-
+                hotAdapter.notifyDataSetChanged();
+                mSwipeToLoadLayout.setRefreshing(false);
             }
         });
 
@@ -101,18 +108,32 @@ public class HostFragment extends Fragment {
             }
         });
 
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(mContext, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Intent intent = new Intent();
+                        intent.putExtra("id",mHotDetails.get(position).getId());
+                        intent.setClass(mContext, DetailsActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+
+                    }
+
+                })
+        );
     }
 
     private void getData() {
         HttpUtil httpUtil = HttpUtil.getInstance();
         String hotUrl = Contants.getHotUrl(start, end);
         httpUtil.getData(hotUrl, new HttpResponse<Hot>(Hot.class) {
-
             @Override
             public void onError(String msg) {
                 Log.i("h520it", "onError: "+msg);
             }
-
             @Override
             public void onSuccess(Hot hot) {
                 if (mHotDetails==null){
@@ -154,19 +175,27 @@ public class HostFragment extends Fragment {
             mRecyclerView.setLayoutManager(manager);
             hotAdapter = new HotAdapter(mHotDetails, getActivity());
             mRecyclerView.setAdapter(hotAdapter);
+            hotAdapter.notifyDataSetChanged();
         }else{
+
             hotAdapter.notifyDataSetChanged();
         }
+
+
 
     }
 
     public static HostFragment newsInstance(){
-        return HostFragment.HostFragmentHolder.sNewsFragment;
+        if(sHostFragment==null){
+            synchronized (HostFragment.class){
+                if(sHostFragment==null){
+                    sHostFragment = new HostFragment();
+                }
+            }
+        }
+        return  sHostFragment;
     }
 
-    private static class HostFragmentHolder{
-        private static  HostFragment sNewsFragment = new HostFragment();
-    }
 
 
 

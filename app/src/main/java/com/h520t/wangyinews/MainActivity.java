@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +24,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mNavigationView;
+    private FragmentManager fm;
+    private Fragment currentF;
     int[] normal_img = {
             R.drawable.biz_navigation_tab_news
             , R.drawable.biz_navigation_tab_read
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fm = getSupportFragmentManager();
         mNavigationView = findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(mNavigationView);
 
@@ -111,9 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = SettingFragment.newsInstance();
                 break;
         }
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_layout, selectedFragment);
-        transaction.commit();
+        showF(selectedFragment);
         //切换图标
         int size = mNavigationView.getMenu().size();
         for (int i = 0; i < size; i++) {
@@ -127,6 +129,21 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    public void showF(Fragment targetF){
+        fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (currentF == null){
+            transaction.add(R.id.fragment_layout,targetF);
+        }else if (!targetF.isAdded()){
+            transaction.hide(currentF).add(R.id.fragment_layout,targetF);
+        }else{
+            transaction.hide(currentF).show(targetF);
+        }
+        currentF = targetF;
+        transaction.commit();
+    }
+
 
 }
 

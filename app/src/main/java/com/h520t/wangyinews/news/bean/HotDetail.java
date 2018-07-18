@@ -16,6 +16,9 @@ public class HotDetail {
     private String title;
     private int replyCount;
     private String img;
+    private String id;
+
+
     public HotDetail() {
     }
 
@@ -34,6 +37,10 @@ public class HotDetail {
                 ", replyCount=" + replyCount +
                 ", img='" + img + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {

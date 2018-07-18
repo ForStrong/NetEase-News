@@ -1,7 +1,6 @@
 package com.h520t.wangyinews.splashScreen;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.google.gson.reflect.TypeToken;
 import com.h520t.wangyinews.MainActivity;
 import com.h520t.wangyinews.R;
 import com.h520t.wangyinews.service.DownloadImgService;
@@ -32,16 +30,8 @@ import com.h520t.wangyinews.util.Md5Helper;
 import com.h520t.wangyinews.util.SharedPreferenceUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class SplashActivity extends AppCompatActivity {
 
