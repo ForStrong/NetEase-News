@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fm = getSupportFragmentManager();
         mNavigationView = findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(mNavigationView);
-
+//        bottom_navigation_bar_container.setAutoHideEnabled(true);
 
         mNavigationView.setItemIconTintList(null);
 

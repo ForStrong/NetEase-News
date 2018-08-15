@@ -25,7 +25,8 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".splashScreen.WebViewActivity" />
-        <activity android:name=".news.activity.DetailsActivity"></activity>
+        <activity android:name=".news.activity.DetailsActivity" />
+        <activity android:name=".news.activity.VideoDetailsActivity"/>
     </application>
 
 </manifest>

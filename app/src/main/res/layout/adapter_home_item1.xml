@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/title_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/img_news"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:maxLines="3"
+        android:text="11111"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/reply_count_news"
+        style="@style/textStyle"
+        android:layout_alignBaseline="@+id/source_news"
+        android:layout_alignBottom="@+id/img_news"
+        android:layout_marginStart="44dp"
+        android:layout_toEndOf="@+id/source_news"
+        android:text="222222" />
+
+    <TextView
+        android:id="@+id/source_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img_news"
+        android:layout_alignParentStart="true"
+        android:text="222222"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/img_news"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/img_news"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/img_news"
+        app:srcCompat="@drawable/close" />
+</RelativeLayout>

@@ -204,12 +204,8 @@ public class SplashActivity extends AppCompatActivity {
 
     static class myHandler extends Handler{
         WeakReference<Activity> mWeakReference;
-        public myHandler() {
-
-        }
-
         public myHandler(Activity activity) {
-            mWeakReference = new WeakReference<Activity>(activity);
+            mWeakReference = new WeakReference<>(activity);
         }
 
         @Override

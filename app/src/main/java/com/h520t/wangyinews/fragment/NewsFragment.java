@@ -56,7 +56,7 @@ public class NewsFragment extends Fragment {
             Fragment fragment;
             FragmentInfo fragmentInfo;
             if (i==0){
-                fragment = new HostFragment();
+                fragment = HostFragment.newsInstance();
             }else {
                 fragment = new EmptyFragment();
             }
