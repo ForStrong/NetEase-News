@@ -86,32 +86,17 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.new_action:
                 selectedFragment = NewsFragment.newsInstance();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.red_text));
-                }
                 break;
             case R.id.read_action:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
-                }
                 selectedFragment = ReadFragment.newsInstance();
                 break;
             case R.id.video_action:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
-                }
                 selectedFragment = VideoFragment.newsInstance();
                 break;
             case R.id.topic_action:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
-                }
                 selectedFragment = TopicFragment.newsInstance();
                 break;
             case R.id.my_action:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
-                }
                 selectedFragment = SettingFragment.newsInstance();
                 break;
         }

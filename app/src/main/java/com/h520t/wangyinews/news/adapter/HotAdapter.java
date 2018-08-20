@@ -31,8 +31,8 @@ import java.util.List;
  */
 
 public class HotAdapter extends Adapter<HotAdapter.ViewHolder>{
-    List<HotDetail> mHotDetails;
-    Context mContext;
+    private List<HotDetail> mHotDetails;
+    private Context mContext;
     public HotAdapter(List<HotDetail> hotDetails,Context context) {
         mHotDetails = hotDetails;
         mContext = context;
@@ -77,7 +77,7 @@ public class HotAdapter extends Adapter<HotAdapter.ViewHolder>{
         TextView title;
         TextView replyCount;
         TextView source;
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             img = view.findViewById(R.id.img);
             title = view.findViewById(R.id.title_news);

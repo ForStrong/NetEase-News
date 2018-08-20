@@ -35,6 +35,8 @@ import com.h520t.wangyinews.util.Contants;
 import com.h520t.wangyinews.util.HttpResponse;
 import com.h520t.wangyinews.util.HttpUtil;
 import com.h520t.wangyinews.util.RecyclerViewDivider;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class HostFragment extends Fragment {
     MyHandler mMyHandler;
     final int INIT_SUCCESS = 0;
     Context mContext;
-    SwipeToLoadLayout mSwipeToLoadLayout;
+    SmartRefreshLayout mSmartRefreshLayout;
     int start = 0;
     int end = 20;
     HomeRVAdapter mHomeRVAdapter;
@@ -66,7 +68,7 @@ public class HostFragment extends Fragment {
         View view;
         if(container.getTag()==null){
             view = inflater.inflate(R.layout.fragment_host, container, false);
-            mSwipeToLoadLayout = view.findViewById(R.id.swipeToLoadLayout);
+            mSmartRefreshLayout = view.findViewById(R.id.refreshLayout);
             mRecyclerView = view.findViewById(R.id.swipe_target);
             container.setTag(view);
         }else{
@@ -89,18 +91,21 @@ public class HostFragment extends Fragment {
         mMyHandler = new MyHandler(this);
         mContext = getActivity();
         getData(start,end,false);
-        mSwipeToLoadLayout.setOnRefreshListener(()->{
+
+        mSmartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             getData(0,20,true);
             mHomeRVAdapter.notifyDataSetChanged();
-            mSwipeToLoadLayout.setRefreshing(false);
+            mSmartRefreshLayout.finishRefresh();//传入false表示刷新失败
         });
 
-        mSwipeToLoadLayout.setOnLoadMoreListener(()->{
+
+        mSmartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
             refreshRVBottomData();
             getData(start,end,false);
             mHomeRVAdapter.notifyDataSetChanged();
-            mSwipeToLoadLayout.setLoadingMore(false);
+            mSmartRefreshLayout.finishLoadMore();//传入false表示刷新失败
         });
+
 
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(mContext, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -119,7 +124,7 @@ public class HostFragment extends Fragment {
 
                     @Override
                     public void onItemLongClick(View view, int position) {
-
+                        Toast.makeText(mContext, "onItemLongClick", Toast.LENGTH_SHORT).show();
                     }
 
                 })

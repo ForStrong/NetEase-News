@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
  */
 
 public class JsonUtil {
-    static Gson mGson;
+    private static Gson mGson;
 
     public static <T> T parseJson(String json, Class<T> t){
         if (mGson == null){

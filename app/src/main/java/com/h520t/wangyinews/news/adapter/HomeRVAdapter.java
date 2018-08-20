@@ -83,7 +83,11 @@ public class HomeRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void loadImgByGlide(String imgUrl, ImageView newsImg) {
-        Glide.with(mContext).load(imgUrl).bitmapTransform(new GlideRoundTransform(mContext)).into(newsImg);
+        if (imgUrl==null){
+            Glide.with(mContext).load(R.drawable.xidada).bitmapTransform(new GlideRoundTransform(mContext)).into(newsImg);
+        }else {
+            Glide.with(mContext).load(imgUrl).bitmapTransform(new GlideRoundTransform(mContext)).into(newsImg);
+        }
     }
 
     @Override
