@@ -59,16 +59,5 @@
             android:layout_marginTop="5dp"
             app:srcCompat="@drawable/close" />
 
-    <ImageView
-        android:id="@+id/play"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignStart="@+id/reply_count_news"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="65dp"
-        app:srcCompat="@drawable/play_circle"
-        tools:ignore="ContentDescription" />
-
     </RelativeLayout>
 </LinearLayout>

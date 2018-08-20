@@ -50,19 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
         mNavigationView.setItemIconTintList(null);
 
-        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Log.i("h520it", "onNavigationItemSelected: " + item.getItemId());
+            return showIcon(item);
 
-                Log.i("h520it", "onNavigationItemSelected: " + item.getItemId());
-                return showIcon(item);
-
-            }
         });
         //动态原则字体颜色
         showTextColor();
 //        mNavigationView.getMenu().getItem(0).setChecked(true);这句话只是让底部按钮设置为选中状态
-                mNavigationView.setSelectedItemId(R.id.new_action);//这句话只是让底部按钮设置为选中状态，并执行监听事件
+        mNavigationView.setSelectedItemId(R.id.new_action);//这句话只是让底部按钮设置为选中状态，并执行监听事件
     }
 
     private void showTextColor() {

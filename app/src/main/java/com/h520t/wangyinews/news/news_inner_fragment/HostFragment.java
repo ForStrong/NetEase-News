@@ -35,6 +35,7 @@ import com.h520t.wangyinews.util.Contants;
 import com.h520t.wangyinews.util.HttpResponse;
 import com.h520t.wangyinews.util.HttpUtil;
 import com.h520t.wangyinews.util.RecyclerViewDivider;
+import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -90,6 +91,7 @@ public class HostFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mMyHandler = new MyHandler(this);
         mContext = getActivity();
+        mSmartRefreshLayout.setRefreshHeader(new WaterDropHeader(mContext));
         getData(start,end,false);
 
         mSmartRefreshLayout.setOnRefreshListener(refreshLayout -> {

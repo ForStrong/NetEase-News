@@ -2,19 +2,20 @@ package com.h520t.wangyinews.news.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.webkit.WebView;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.h520t.wangyinews.R;
 import com.h520t.wangyinews.news.bean.Details;
 import com.h520t.wangyinews.news.bean.DetailsImg;
-import com.h520t.wangyinews.splashScreen.WebViewActivity;
 import com.h520t.wangyinews.util.Contants;
 import com.h520t.wangyinews.util.HttpResponse;
 import com.h520t.wangyinews.util.HttpUtil;
@@ -25,13 +26,12 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
     MyHandler mMyHandler;
     WebView mWebView;
     TextView replyCount;
-
+    Toolbar mToolbar;
     String id;
     ArrayList<DetailsImg> images;
     Details web;
@@ -43,6 +43,21 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         initView();
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(v -> finish());
+        mToolbar.setOnMenuItemClickListener(item ->
+        {
+            switch (item.getItemId()) {
+                case R.id.share:
+                    Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        });
         //拿到url
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
@@ -88,14 +103,19 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.news_details_toolbar_menu,menu);
+        return true;
     }
 
     private void initView() {
         mMyHandler = new MyHandler(this);
         mWebView = findViewById(R.id.webView);
         replyCount = findViewById(R.id.reply_count);
+        mToolbar = findViewById(R.id.tool_bar);
     }
 
     static class MyHandler extends Handler {
