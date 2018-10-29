@@ -164,6 +164,7 @@ public class HostFragment extends Fragment {
         });
     }
 
+    @SuppressLint("HandlerLeak")
     class MyHandler extends Handler{
         WeakReference<HostFragment> mHostFragmentWeakReference;
         MyHandler(HostFragment hostFragment){
