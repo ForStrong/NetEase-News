@@ -1,4 +1,4 @@
-# WangYiNews
+# NetEase-News
 
 效果图：
 
